@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package whiteboard;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/geektuhin123/whiteboard";
+
+service Whiteboard {
+  rpc AddDrawing(Drawing) returns (google.protobuf.Empty);
+  rpc GetDrawings(google.protobuf.Empty) returns (stream Drawing);
+  rpc ConnectUser(User) returns (google.protobuf.Empty);
+  rpc DisconnectUser(User) returns (google.protobuf.Empty);
+  rpc Undo(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Redo(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+message Drawing {
+  string id = 1;
+  string user_id = 2;
+  repeated Point points = 3;
+}
+
+message Point {
+  float x = 1;
+  float y = 2;
+}
+
+message User {
+  string id = 1;
+}
