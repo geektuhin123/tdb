@@ -186,6 +186,234 @@ func (x *User) GetId() string {
 	return ""
 }
 
+type GetWhiteboardResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Strokes []*Stroke `protobuf:"bytes,1,rep,name=strokes,proto3" json:"strokes,omitempty"`
+}
+
+func (x *GetWhiteboardResponse) Reset() {
+	*x = GetWhiteboardResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_whiteboard_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWhiteboardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWhiteboardResponse) ProtoMessage() {}
+
+func (x *GetWhiteboardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_whiteboard_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWhiteboardResponse.ProtoReflect.Descriptor instead.
+func (*GetWhiteboardResponse) Descriptor() ([]byte, []int) {
+	return file_whiteboard_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetWhiteboardResponse) GetStrokes() []*Stroke {
+	if x != nil {
+		return x.Strokes
+	}
+	return nil
+}
+
+type Stroke struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Color     string   `protobuf:"bytes,2,opt,name=color,proto3" json:"color,omitempty"`
+	LineWidth float32  `protobuf:"fixed32,3,opt,name=line_width,json=lineWidth,proto3" json:"line_width,omitempty"`
+	Points    []*Point `protobuf:"bytes,4,rep,name=points,proto3" json:"points,omitempty"`
+}
+
+func (x *Stroke) Reset() {
+	*x = Stroke{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_whiteboard_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Stroke) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Stroke) ProtoMessage() {}
+
+func (x *Stroke) ProtoReflect() protoreflect.Message {
+	mi := &file_whiteboard_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Stroke.ProtoReflect.Descriptor instead.
+func (*Stroke) Descriptor() ([]byte, []int) {
+	return file_whiteboard_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Stroke) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Stroke) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+func (x *Stroke) GetLineWidth() float32 {
+	if x != nil {
+		return x.LineWidth
+	}
+	return 0
+}
+
+func (x *Stroke) GetPoints() []*Point {
+	if x != nil {
+		return x.Points
+	}
+	return nil
+}
+
+type DrawRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Color     string   `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	LineWidth float32  `protobuf:"fixed32,2,opt,name=line_width,json=lineWidth,proto3" json:"line_width,omitempty"`
+	Points    []*Point `protobuf:"bytes,3,rep,name=points,proto3" json:"points,omitempty"`
+}
+
+func (x *DrawRequest) Reset() {
+	*x = DrawRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_whiteboard_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DrawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DrawRequest) ProtoMessage() {}
+
+func (x *DrawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_whiteboard_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DrawRequest.ProtoReflect.Descriptor instead.
+func (*DrawRequest) Descriptor() ([]byte, []int) {
+	return file_whiteboard_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DrawRequest) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+func (x *DrawRequest) GetLineWidth() float32 {
+	if x != nil {
+		return x.LineWidth
+	}
+	return 0
+}
+
+func (x *DrawRequest) GetPoints() []*Point {
+	if x != nil {
+		return x.Points
+	}
+	return nil
+}
+
+type DrawResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DrawResponse) Reset() {
+	*x = DrawResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_whiteboard_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DrawResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DrawResponse) ProtoMessage() {}
+
+func (x *DrawResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_whiteboard_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DrawResponse.ProtoReflect.Descriptor instead.
+func (*DrawResponse) Descriptor() ([]byte, []int) {
+	return file_whiteboard_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DrawResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 var File_whiteboard_proto protoreflect.FileDescriptor
 
 var file_whiteboard_proto_rawDesc = []byte{
@@ -202,7 +430,28 @@ var file_whiteboard_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x74, 0x12, 0x0c, 0x0a, 0x01, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52, 0x01,
 	0x78, 0x12, 0x0c, 0x0a, 0x01, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x01, 0x79, 0x22,
 	0x16, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x32, 0xea, 0x02, 0x0a, 0x0a, 0x57, 0x68, 0x69, 0x74,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x45, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x57, 0x68,
+	0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x2c, 0x0a, 0x07, 0x73, 0x74, 0x72, 0x6f, 0x6b, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x12, 0x2e, 0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x2e, 0x53,
+	0x74, 0x72, 0x6f, 0x6b, 0x65, 0x52, 0x07, 0x73, 0x74, 0x72, 0x6f, 0x6b, 0x65, 0x73, 0x22, 0x78,
+	0x0a, 0x06, 0x53, 0x74, 0x72, 0x6f, 0x6b, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x6c, 0x6f,
+	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x12, 0x1d,
+	0x0a, 0x0a, 0x6c, 0x69, 0x6e, 0x65, 0x5f, 0x77, 0x69, 0x64, 0x74, 0x68, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x02, 0x52, 0x09, 0x6c, 0x69, 0x6e, 0x65, 0x57, 0x69, 0x64, 0x74, 0x68, 0x12, 0x29, 0x0a,
+	0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e,
+	0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x2e, 0x50, 0x6f, 0x69, 0x6e, 0x74,
+	0x52, 0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x22, 0x6d, 0x0a, 0x0b, 0x44, 0x72, 0x61, 0x77,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x12, 0x1d, 0x0a,
+	0x0a, 0x6c, 0x69, 0x6e, 0x65, 0x5f, 0x77, 0x69, 0x64, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x02, 0x52, 0x09, 0x6c, 0x69, 0x6e, 0x65, 0x57, 0x69, 0x64, 0x74, 0x68, 0x12, 0x29, 0x0a, 0x06,
+	0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x77,
+	0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x2e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x52,
+	0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x22, 0x1e, 0x0a, 0x0c, 0x44, 0x72, 0x61, 0x77, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x32, 0xf1, 0x03, 0x0a, 0x0a, 0x57, 0x68, 0x69, 0x74,
 	0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x12, 0x39, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x44, 0x72, 0x61,
 	0x77, 0x69, 0x6e, 0x67, 0x12, 0x13, 0x2e, 0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72,
 	0x64, 0x2e, 0x44, 0x72, 0x61, 0x77, 0x69, 0x6e, 0x67, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
@@ -225,10 +474,18 @@ var file_whiteboard_proto_rawDesc = []byte{
 	0x52, 0x65, 0x64, 0x6f, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x16, 0x2e, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
-	0x6d, 0x70, 0x74, 0x79, 0x42, 0x24, 0x5a, 0x22, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x67, 0x65, 0x65, 0x6b, 0x74, 0x75, 0x68, 0x69, 0x6e, 0x31, 0x32, 0x33, 0x2f,
-	0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6d, 0x70, 0x74, 0x79, 0x12, 0x39, 0x0a, 0x04, 0x44, 0x72, 0x61, 0x77, 0x12, 0x17, 0x2e, 0x77,
+	0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x2e, 0x44, 0x72, 0x61, 0x77, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61,
+	0x72, 0x64, 0x2e, 0x44, 0x72, 0x61, 0x77, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x4a, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x57, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72, 0x64,
+	0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x21, 0x2e, 0x77, 0x68, 0x69, 0x74, 0x65,
+	0x62, 0x6f, 0x61, 0x72, 0x64, 0x2e, 0x47, 0x65, 0x74, 0x57, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f,
+	0x61, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x24, 0x5a, 0x22, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x65, 0x65, 0x6b, 0x74, 0x75,
+	0x68, 0x69, 0x6e, 0x31, 0x32, 0x33, 0x2f, 0x77, 0x68, 0x69, 0x74, 0x65, 0x62, 0x6f, 0x61, 0x72,
+	0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -243,32 +500,43 @@ func file_whiteboard_proto_rawDescGZIP() []byte {
 	return file_whiteboard_proto_rawDescData
 }
 
-var file_whiteboard_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_whiteboard_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_whiteboard_proto_goTypes = []interface{}{
-	(*Drawing)(nil),       // 0: whiteboard.Drawing
-	(*Point)(nil),         // 1: whiteboard.Point
-	(*User)(nil),          // 2: whiteboard.User
-	(*emptypb.Empty)(nil), // 3: google.protobuf.Empty
+	(*Drawing)(nil),               // 0: whiteboard.Drawing
+	(*Point)(nil),                 // 1: whiteboard.Point
+	(*User)(nil),                  // 2: whiteboard.User
+	(*GetWhiteboardResponse)(nil), // 3: whiteboard.GetWhiteboardResponse
+	(*Stroke)(nil),                // 4: whiteboard.Stroke
+	(*DrawRequest)(nil),           // 5: whiteboard.DrawRequest
+	(*DrawResponse)(nil),          // 6: whiteboard.DrawResponse
+	(*emptypb.Empty)(nil),         // 7: google.protobuf.Empty
 }
 var file_whiteboard_proto_depIdxs = []int32{
-	1, // 0: whiteboard.Drawing.points:type_name -> whiteboard.Point
-	0, // 1: whiteboard.Whiteboard.AddDrawing:input_type -> whiteboard.Drawing
-	3, // 2: whiteboard.Whiteboard.GetDrawings:input_type -> google.protobuf.Empty
-	2, // 3: whiteboard.Whiteboard.ConnectUser:input_type -> whiteboard.User
-	2, // 4: whiteboard.Whiteboard.DisconnectUser:input_type -> whiteboard.User
-	3, // 5: whiteboard.Whiteboard.Undo:input_type -> google.protobuf.Empty
-	3, // 6: whiteboard.Whiteboard.Redo:input_type -> google.protobuf.Empty
-	3, // 7: whiteboard.Whiteboard.AddDrawing:output_type -> google.protobuf.Empty
-	0, // 8: whiteboard.Whiteboard.GetDrawings:output_type -> whiteboard.Drawing
-	3, // 9: whiteboard.Whiteboard.ConnectUser:output_type -> google.protobuf.Empty
-	3, // 10: whiteboard.Whiteboard.DisconnectUser:output_type -> google.protobuf.Empty
-	3, // 11: whiteboard.Whiteboard.Undo:output_type -> google.protobuf.Empty
-	3, // 12: whiteboard.Whiteboard.Redo:output_type -> google.protobuf.Empty
-	7, // [7:13] is the sub-list for method output_type
-	1, // [1:7] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1,  // 0: whiteboard.Drawing.points:type_name -> whiteboard.Point
+	4,  // 1: whiteboard.GetWhiteboardResponse.strokes:type_name -> whiteboard.Stroke
+	1,  // 2: whiteboard.Stroke.points:type_name -> whiteboard.Point
+	1,  // 3: whiteboard.DrawRequest.points:type_name -> whiteboard.Point
+	0,  // 4: whiteboard.Whiteboard.AddDrawing:input_type -> whiteboard.Drawing
+	7,  // 5: whiteboard.Whiteboard.GetDrawings:input_type -> google.protobuf.Empty
+	2,  // 6: whiteboard.Whiteboard.ConnectUser:input_type -> whiteboard.User
+	2,  // 7: whiteboard.Whiteboard.DisconnectUser:input_type -> whiteboard.User
+	7,  // 8: whiteboard.Whiteboard.Undo:input_type -> google.protobuf.Empty
+	7,  // 9: whiteboard.Whiteboard.Redo:input_type -> google.protobuf.Empty
+	5,  // 10: whiteboard.Whiteboard.Draw:input_type -> whiteboard.DrawRequest
+	7,  // 11: whiteboard.Whiteboard.GetWhiteboard:input_type -> google.protobuf.Empty
+	7,  // 12: whiteboard.Whiteboard.AddDrawing:output_type -> google.protobuf.Empty
+	0,  // 13: whiteboard.Whiteboard.GetDrawings:output_type -> whiteboard.Drawing
+	7,  // 14: whiteboard.Whiteboard.ConnectUser:output_type -> google.protobuf.Empty
+	7,  // 15: whiteboard.Whiteboard.DisconnectUser:output_type -> google.protobuf.Empty
+	7,  // 16: whiteboard.Whiteboard.Undo:output_type -> google.protobuf.Empty
+	7,  // 17: whiteboard.Whiteboard.Redo:output_type -> google.protobuf.Empty
+	6,  // 18: whiteboard.Whiteboard.Draw:output_type -> whiteboard.DrawResponse
+	3,  // 19: whiteboard.Whiteboard.GetWhiteboard:output_type -> whiteboard.GetWhiteboardResponse
+	12, // [12:20] is the sub-list for method output_type
+	4,  // [4:12] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_whiteboard_proto_init() }
@@ -313,6 +581,54 @@ func file_whiteboard_proto_init() {
 				return nil
 			}
 		}
+		file_whiteboard_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWhiteboardResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_whiteboard_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Stroke); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_whiteboard_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DrawRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_whiteboard_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DrawResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -320,7 +636,7 @@ func file_whiteboard_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_whiteboard_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

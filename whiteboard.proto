@@ -13,6 +13,8 @@ service Whiteboard {
   rpc DisconnectUser(User) returns (google.protobuf.Empty);
   rpc Undo(google.protobuf.Empty) returns (google.protobuf.Empty);
   rpc Redo(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Draw(DrawRequest) returns (DrawResponse);
+  rpc GetWhiteboard(google.protobuf.Empty) returns (GetWhiteboardResponse);
 }
 
 message Drawing {
@@ -28,4 +30,25 @@ message Point {
 
 message User {
   string id = 1;
+}
+
+message GetWhiteboardResponse {
+    repeated Stroke strokes = 1;
+}
+
+message Stroke {
+  int32 id = 1;
+  string color = 2;
+  float line_width = 3;
+  repeated Point points = 4;
+}
+
+message DrawRequest {
+  string color = 1;
+  float line_width = 2;
+  repeated Point points = 3;
+}
+
+message DrawResponse {
+  int32 id = 1;
 }

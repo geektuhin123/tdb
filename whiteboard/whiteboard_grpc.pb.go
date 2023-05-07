@@ -29,6 +29,8 @@ type WhiteboardClient interface {
 	DisconnectUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Undo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Redo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Draw(ctx context.Context, in *DrawRequest, opts ...grpc.CallOption) (*DrawResponse, error)
+	GetWhiteboard(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWhiteboardResponse, error)
 }
 
 type whiteboardClient struct {
@@ -116,6 +118,24 @@ func (c *whiteboardClient) Redo(ctx context.Context, in *emptypb.Empty, opts ...
 	return out, nil
 }
 
+func (c *whiteboardClient) Draw(ctx context.Context, in *DrawRequest, opts ...grpc.CallOption) (*DrawResponse, error) {
+	out := new(DrawResponse)
+	err := c.cc.Invoke(ctx, "/whiteboard.Whiteboard/Draw", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whiteboardClient) GetWhiteboard(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWhiteboardResponse, error) {
+	out := new(GetWhiteboardResponse)
+	err := c.cc.Invoke(ctx, "/whiteboard.Whiteboard/GetWhiteboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WhiteboardServer is the server API for Whiteboard service.
 // All implementations must embed UnimplementedWhiteboardServer
 // for forward compatibility
@@ -126,6 +146,8 @@ type WhiteboardServer interface {
 	DisconnectUser(context.Context, *User) (*emptypb.Empty, error)
 	Undo(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	Redo(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	Draw(context.Context, *DrawRequest) (*DrawResponse, error)
+	GetWhiteboard(context.Context, *emptypb.Empty) (*GetWhiteboardResponse, error)
 	mustEmbedUnimplementedWhiteboardServer()
 }
 
@@ -150,6 +172,12 @@ func (UnimplementedWhiteboardServer) Undo(context.Context, *emptypb.Empty) (*emp
 }
 func (UnimplementedWhiteboardServer) Redo(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Redo not implemented")
+}
+func (UnimplementedWhiteboardServer) Draw(context.Context, *DrawRequest) (*DrawResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Draw not implemented")
+}
+func (UnimplementedWhiteboardServer) GetWhiteboard(context.Context, *emptypb.Empty) (*GetWhiteboardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWhiteboard not implemented")
 }
 func (UnimplementedWhiteboardServer) mustEmbedUnimplementedWhiteboardServer() {}
 
@@ -275,6 +303,42 @@ func _Whiteboard_Redo_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Whiteboard_Draw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhiteboardServer).Draw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/whiteboard.Whiteboard/Draw",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhiteboardServer).Draw(ctx, req.(*DrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Whiteboard_GetWhiteboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhiteboardServer).GetWhiteboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/whiteboard.Whiteboard/GetWhiteboard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhiteboardServer).GetWhiteboard(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Whiteboard_ServiceDesc is the grpc.ServiceDesc for Whiteboard service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -301,6 +365,14 @@ var Whiteboard_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Redo",
 			Handler:    _Whiteboard_Redo_Handler,
+		},
+		{
+			MethodName: "Draw",
+			Handler:    _Whiteboard_Draw_Handler,
+		},
+		{
+			MethodName: "GetWhiteboard",
+			Handler:    _Whiteboard_GetWhiteboard_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
