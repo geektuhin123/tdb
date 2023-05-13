@@ -8,5 +8,5 @@ DROP TABLE IF EXISTS stroke;
 DROP TABLE IF EXISTS whiteboard;
 
 -- Drop User table
-DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS "authors";
 

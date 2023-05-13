@@ -24,11 +24,17 @@ func New(db DBTX) *Queries {
 func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	q := Queries{db: db}
 	var err error
+	if q.createAuthorStmt, err = db.PrepareContext(ctx, createAuthor); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateAuthor: %w", err)
+	}
 	if q.createWhiteboardStmt, err = db.PrepareContext(ctx, createWhiteboard); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateWhiteboard: %w", err)
 	}
 	if q.deleteWhiteboardStmt, err = db.PrepareContext(ctx, deleteWhiteboard); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteWhiteboard: %w", err)
+	}
+	if q.getAuthorStmt, err = db.PrepareContext(ctx, getAuthor); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAuthor: %w", err)
 	}
 	if q.getWhiteboardStmt, err = db.PrepareContext(ctx, getWhiteboard); err != nil {
 		return nil, fmt.Errorf("error preparing query GetWhiteboard: %w", err)
@@ -36,11 +42,19 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.listWhiteboardStmt, err = db.PrepareContext(ctx, listWhiteboard); err != nil {
 		return nil, fmt.Errorf("error preparing query ListWhiteboard: %w", err)
 	}
+	if q.updateAuthorStmt, err = db.PrepareContext(ctx, updateAuthor); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateAuthor: %w", err)
+	}
 	return &q, nil
 }
 
 func (q *Queries) Close() error {
 	var err error
+	if q.createAuthorStmt != nil {
+		if cerr := q.createAuthorStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createAuthorStmt: %w", cerr)
+		}
+	}
 	if q.createWhiteboardStmt != nil {
 		if cerr := q.createWhiteboardStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createWhiteboardStmt: %w", cerr)
@@ -51,6 +65,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing deleteWhiteboardStmt: %w", cerr)
 		}
 	}
+	if q.getAuthorStmt != nil {
+		if cerr := q.getAuthorStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAuthorStmt: %w", cerr)
+		}
+	}
 	if q.getWhiteboardStmt != nil {
 		if cerr := q.getWhiteboardStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getWhiteboardStmt: %w", cerr)
@@ -59,6 +78,11 @@ func (q *Queries) Close() error {
 	if q.listWhiteboardStmt != nil {
 		if cerr := q.listWhiteboardStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing listWhiteboardStmt: %w", cerr)
+		}
+	}
+	if q.updateAuthorStmt != nil {
+		if cerr := q.updateAuthorStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateAuthorStmt: %w", cerr)
 		}
 	}
 	return err
@@ -100,19 +124,25 @@ func (q *Queries) queryRow(ctx context.Context, stmt *sql.Stmt, query string, ar
 type Queries struct {
 	db                   DBTX
 	tx                   *sql.Tx
+	createAuthorStmt     *sql.Stmt
 	createWhiteboardStmt *sql.Stmt
 	deleteWhiteboardStmt *sql.Stmt
+	getAuthorStmt        *sql.Stmt
 	getWhiteboardStmt    *sql.Stmt
 	listWhiteboardStmt   *sql.Stmt
+	updateAuthorStmt     *sql.Stmt
 }
 
 func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 	return &Queries{
 		db:                   tx,
 		tx:                   tx,
+		createAuthorStmt:     q.createAuthorStmt,
 		createWhiteboardStmt: q.createWhiteboardStmt,
 		deleteWhiteboardStmt: q.deleteWhiteboardStmt,
+		getAuthorStmt:        q.getAuthorStmt,
 		getWhiteboardStmt:    q.getWhiteboardStmt,
 		listWhiteboardStmt:   q.listWhiteboardStmt,
+		updateAuthorStmt:     q.updateAuthorStmt,
 	}
 }
